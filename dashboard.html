@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kajero Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="container">
+
+    <div class="card">
+        <h1>Kajero</h1>
+        <p class="subtitle">Simulador bancario</p>
+
+        <div class="balance-box">
+            <span>Saldo actual</span>
+            <h2 id="balance">$0</h2>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>Depositar</h2>
+
+        <input 
+            id="depositAmount"
+            type="number"
+            min="1"
+            placeholder="Ingrese el monto"
+        >
+
+        <button type="button" onclick="deposit()">
+            Depositar
+        </button>
+    </div>
+
+    <div class="card">
+        <h2>Retirar</h2>
+
+        <input 
+            id="withdrawAmount"
+            type="number"
+            min="1"
+            placeholder="Ingrese el monto"
+        >
+
+        <button type="button" onclick="withdraw()">
+            Retirar
+        </button>
+    </div>
+
+    <div class="card">
+        <h2>Transferir</h2>
+
+        <input 
+            id="toUser"
+            type="text"
+            placeholder="Usuario destino"
+            autocomplete="off"
+        >
+
+        <input 
+            id="transferAmount"
+            type="number"
+            min="1"
+            placeholder="Monto a transferir"
+        >
+
+        <button type="button" onclick="transfer()">
+            Transferir
+        </button>
+    </div>
+
+    <button 
+        type="button"
+        class="logout-btn"
+        onclick="logout()"
+    >
+        Cerrar sesión
+    </button>
+
+</div>
+
+<script src="storage.js"></script>
+<script src="app.js"></script>
+
+</body>
+</html>
