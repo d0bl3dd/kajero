@@ -6,6 +6,11 @@
     <title>Kajero | Login</title>
 
     <link rel="stylesheet" href="styles.css">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
 </head>
 <body>
 
@@ -13,34 +18,43 @@
 
     <div class="card login-card">
 
-        <h1>Kajero</h1>
+        <h1>
+            <i class="fa-solid fa-building-columns"></i>
+            Kajero
+        </h1>
 
         <p class="subtitle">
-            Accede a tu cuenta
+            Accede a tu cuenta bancaria digital
         </p>
 
         <div class="input-group">
+
             <input
                 id="user"
                 type="text"
                 placeholder="Usuario"
                 autocomplete="off"
             >
+
         </div>
 
         <div class="input-group">
+
             <input
                 id="pass"
                 type="password"
                 placeholder="Contraseña"
             >
+
         </div>
 
         <div class="button-group">
+
             <button
                 type="button"
                 onclick="login()"
             >
+                <i class="fa-solid fa-right-to-bracket"></i>
                 Iniciar sesión
             </button>
 
@@ -49,8 +63,10 @@
                 class="secondary-btn"
                 onclick="register()"
             >
+                <i class="fa-solid fa-user-plus"></i>
                 Registrarse
             </button>
+
         </div>
 
     </div>
