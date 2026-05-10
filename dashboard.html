@@ -3,80 +3,144 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kajero Dashboard</title>
+    <title>Kajero | Dashboard</title>
+
     <link rel="stylesheet" href="styles.css">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
 </head>
 <body>
 
 <div class="container">
 
     <div class="card">
-        <h1>Kajero</h1>
-        <p class="subtitle">Simulador bancario</p>
+
+        <h1>
+            <i class="fa-solid fa-building-columns"></i>
+            Kajero
+        </h1>
+
+        <p class="subtitle">
+            Panel bancario digital
+        </p>
 
         <div class="balance-box">
-            <span>Saldo actual</span>
-            <h2 id="balance">$0</h2>
+
+            <span>
+                <i class="fa-solid fa-wallet"></i>
+                Saldo disponible
+            </span>
+
+            <h3 id="balance">$ 0</h3>
+
         </div>
+
     </div>
 
     <div class="card">
-        <h2>Depositar</h2>
 
-        <input 
-            id="depositAmount"
-            type="number"
-            min="1"
-            placeholder="Ingrese el monto"
+        <h2>
+            <i class="fa-solid fa-money-bill-trend-up"></i>
+            Depositar dinero
+        </h2>
+
+        <div class="input-group">
+
+            <input
+                id="depositAmount"
+                type="number"
+                min="1"
+                placeholder="Ingrese el monto"
+            >
+
+        </div>
+
+        <button
+            type="button"
+            onclick="deposit()"
         >
-
-        <button type="button" onclick="deposit()">
+            <i class="fa-solid fa-circle-plus"></i>
             Depositar
         </button>
+
     </div>
 
     <div class="card">
-        <h2>Retirar</h2>
 
-        <input 
-            id="withdrawAmount"
-            type="number"
-            min="1"
-            placeholder="Ingrese el monto"
+        <h2>
+            <i class="fa-solid fa-money-bill-wave"></i>
+            Retirar dinero
+        </h2>
+
+        <div class="input-group">
+
+            <input
+                id="withdrawAmount"
+                type="number"
+                min="1"
+                placeholder="Ingrese el monto"
+            >
+
+        </div>
+
+        <button
+            type="button"
+            onclick="withdraw()"
         >
-
-        <button type="button" onclick="withdraw()">
+            <i class="fa-solid fa-circle-minus"></i>
             Retirar
         </button>
+
     </div>
 
     <div class="card">
-        <h2>Transferir</h2>
 
-        <input 
-            id="toUser"
-            type="text"
-            placeholder="Usuario destino"
-            autocomplete="off"
+        <h2>
+            <i class="fa-solid fa-paper-plane"></i>
+            Transferencia
+        </h2>
+
+        <div class="input-group">
+
+            <input
+                id="toUser"
+                type="text"
+                placeholder="Usuario destino"
+                autocomplete="off"
+            >
+
+        </div>
+
+        <div class="input-group">
+
+            <input
+                id="transferAmount"
+                type="number"
+                min="1"
+                placeholder="Monto a transferir"
+            >
+
+        </div>
+
+        <button
+            type="button"
+            onclick="transfer()"
         >
-
-        <input 
-            id="transferAmount"
-            type="number"
-            min="1"
-            placeholder="Monto a transferir"
-        >
-
-        <button type="button" onclick="transfer()">
+            <i class="fa-solid fa-arrow-right-arrow-left"></i>
             Transferir
         </button>
+
     </div>
 
-    <button 
+    <button
         type="button"
         class="logout-btn"
         onclick="logout()"
     >
+        <i class="fa-solid fa-right-from-bracket"></i>
         Cerrar sesión
     </button>
 
