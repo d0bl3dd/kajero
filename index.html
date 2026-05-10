@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kajero | Inicio</title>
+    <title>Kajero | Login</title>
 
     <link rel="stylesheet" href="styles.css">
 
@@ -16,7 +16,7 @@
 
 <div class="container">
 
-    <div class="card">
+    <div class="card login-card">
 
         <h1>
             <i class="fa-solid fa-building-columns"></i>
@@ -24,33 +24,57 @@
         </h1>
 
         <p class="subtitle">
-            Simulador bancario digital moderno
+            Accede a tu cuenta bancaria digital
         </p>
 
-        <div class="balance-box">
+        <div class="input-group">
 
-            <span>
-                <i class="fa-solid fa-shield-halved"></i>
-                Seguridad • Transferencias • Gestión
-            </span>
-
-            <h3>
-                <i class="fa-solid fa-wallet"></i>
-            </h3>
+            <input
+                id="user"
+                type="text"
+                placeholder="Usuario"
+                autocomplete="off"
+            >
 
         </div>
 
-        <a
-            href="login.html"
-            class="btn"
-        >
-            <i class="fa-solid fa-right-to-bracket"></i>
-            Iniciar sesión
-        </a>
+        <div class="input-group">
+
+            <input
+                id="pass"
+                type="password"
+                placeholder="Contraseña"
+            >
+
+        </div>
+
+        <div class="button-group">
+
+            <button
+                type="button"
+                onclick="login()"
+            >
+                <i class="fa-solid fa-right-to-bracket"></i>
+                Iniciar sesión
+            </button>
+
+            <button
+                type="button"
+                class="secondary-btn"
+                onclick="register()"
+            >
+                <i class="fa-solid fa-user-plus"></i>
+                Registrarse
+            </button>
+
+        </div>
 
     </div>
 
 </div>
+
+<script src="storage.js"></script>
+<script src="app.js"></script>
 
 </body>
 </html>
