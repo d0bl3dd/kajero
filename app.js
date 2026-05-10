@@ -1,18 +1,13 @@
-/* =========================
-   KAJERO APP
-========================= */
-
-/* ===== LOGIN ===== */
 function login() {
-    let user = document.getElementById("user").value.trim();
-    let pass = document.getElementById("pass").value.trim();
+    const user = document.getElementById("user").value.trim();
+    const pass = document.getElementById("pass").value.trim();
 
     if (!user || !pass) {
         alert("Completa todos los campos");
         return;
     }
 
-    let found = users.find(
+    const found = users.find(
         u => u.name === user && u.password === pass
     );
 
@@ -31,24 +26,28 @@ function login() {
     window.location.href = "dashboard.html";
 }
 
-/* ===== REGISTRO ===== */
 function register() {
-    let user = document.getElementById("user").value.trim();
-    let pass = document.getElementById("pass").value.trim();
+    const user = document.getElementById("user").value.trim();
+    const pass = document.getElementById("pass").value.trim();
 
     if (!user || !pass) {
         alert("Completa todos los campos");
         return;
     }
 
-    let exists = users.find(u => u.name === user);
+    if (pass.length < 4) {
+        alert("La contraseña debe tener mínimo 4 caracteres");
+        return;
+    }
+
+    const exists = users.find(u => u.name === user);
 
     if (exists) {
         alert("Ese usuario ya existe");
         return;
     }
 
-    let newUser = {
+    const newUser = {
         id: Date.now(),
         name: user,
         password: pass,
@@ -63,15 +62,17 @@ function register() {
     );
 
     alert("Usuario registrado correctamente");
+
+    document.getElementById("user").value = "";
+    document.getElementById("pass").value = "";
 }
 
-/* ===== DEPÓSITO ===== */
 function deposit() {
-    let amount = Number(
+    const amount = Number(
         document.getElementById("depositAmount").value
     );
 
-    if (isNaN(amount) || amount <= 0) {
+    if (!amount || amount <= 0) {
         alert("Monto inválido");
         return;
     }
@@ -87,15 +88,18 @@ function deposit() {
 
     updateUser();
     refresh();
+
+    document.getElementById("depositAmount").value = "";
+
+    showMessage("Depósito realizado correctamente");
 }
 
-/* ===== RETIRO ===== */
 function withdraw() {
-    let amount = Number(
+    const amount = Number(
         document.getElementById("withdrawAmount").value
     );
 
-    if (isNaN(amount) || amount <= 0) {
+    if (!amount || amount <= 0) {
         alert("Monto inválido");
         return;
     }
@@ -116,20 +120,28 @@ function withdraw() {
 
     updateUser();
     refresh();
+
+    document.getElementById("withdrawAmount").value = "";
+
+    showMessage("Retiro realizado correctamente");
 }
 
-/* ===== TRANSFERENCIA ===== */
 function transfer() {
-    let receiverName = document
+    const receiverName = document
         .getElementById("toUser")
         .value
         .trim();
 
-    let amount = Number(
+    const amount = Number(
         document.getElementById("transferAmount").value
     );
 
-    let receiver = users.find(
+    if (!receiverName || !amount) {
+        alert("Completa todos los campos");
+        return;
+    }
+
+    const receiver = users.find(
         u => u.name === receiverName
     );
 
@@ -143,7 +155,7 @@ function transfer() {
         return;
     }
 
-    if (isNaN(amount) || amount <= 0) {
+    if (amount <= 0) {
         alert("Monto inválido");
         return;
     }
@@ -156,7 +168,7 @@ function transfer() {
     currentUser.balance -= amount;
     receiver.balance += amount;
 
-    let receiverIndex = users.findIndex(
+    const receiverIndex = users.findIndex(
         u => u.id === receiver.id
     );
 
@@ -178,21 +190,23 @@ function transfer() {
 
     refresh();
 
-    alert("Transferencia realizada");
+    document.getElementById("toUser").value = "";
+    document.getElementById("transferAmount").value = "";
+
+    showMessage("Transferencia realizada");
 }
 
-/* ===== TRANSACCIONES ===== */
 function addTransaction(type, amount, from, to) {
-    let transaction = {
+    const transaction = {
         id: Date.now(),
-        type: type,
-        amount: amount,
-        from: from,
-        to: to,
+        type,
+        amount,
+        from,
+        to,
         date: new Date().toLocaleString()
     };
 
-    transactions.push(transaction);
+    transactions.unshift(transaction);
 
     localStorage.setItem(
         "transactions",
@@ -200,9 +214,8 @@ function addTransaction(type, amount, from, to) {
     );
 }
 
-/* ===== ACTUALIZAR USUARIO ===== */
 function updateUser() {
-    let index = users.findIndex(
+    const index = users.findIndex(
         u => u.id === currentUser.id
     );
 
@@ -221,25 +234,49 @@ function updateUser() {
     );
 }
 
-/* ===== REFRESH UI ===== */
 function refresh() {
-    let balanceElement =
+    const balanceElement =
         document.getElementById("balance");
 
     if (balanceElement) {
         balanceElement.innerText =
-            "$" + currentUser.balance.toLocaleString();
+            "$ " + currentUser.balance.toLocaleString();
     }
 }
 
-/* ===== LOGOUT ===== */
 function logout() {
     localStorage.removeItem("currentUser");
 
     window.location.href = "login.html";
 }
 
-/* ===== PROTEGER DASHBOARD ===== */
+function showMessage(text) {
+    const old = document.querySelector(".toast");
+
+    if (old) {
+        old.remove();
+    }
+
+    const toast = document.createElement("div");
+
+    toast.className = "toast";
+    toast.innerText = text;
+
+    document.body.appendChild(toast);
+
+    setTimeout(() => {
+        toast.classList.add("show");
+    }, 100);
+
+    setTimeout(() => {
+        toast.classList.remove("show");
+
+        setTimeout(() => {
+            toast.remove();
+        }, 300);
+    }, 2500);
+}
+
 if (
     window.location.pathname.includes("dashboard")
 ) {
@@ -248,9 +285,17 @@ if (
     }
 }
 
-/* ===== CARGA AUTOMÁTICA ===== */
 window.onload = () => {
     if (currentUser) {
         refresh();
     }
 };
+
+document.addEventListener("keydown", e => {
+    if (e.key === "Enter") {
+
+        if (document.getElementById("user")) {
+            login();
+        }
+    }
+});
